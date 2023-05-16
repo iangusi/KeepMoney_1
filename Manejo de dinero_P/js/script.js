@@ -13,6 +13,7 @@ let questionCount;
 let scoreCount = 0;
 let count = 11;
 let countdown;
+let answerr = false;
 
 //Questions and Options array
 
@@ -89,6 +90,8 @@ restart.addEventListener("click", () => {
 nextBtn.addEventListener(
     "click",
     (displayNext = () => {
+        if(answerr == true){
+			answerr = false;
         //increment questionCount
         questionCount += 1;
         //if last question
@@ -108,7 +111,7 @@ nextBtn.addEventListener(
             count = 11;
             clearInterval(countdown);
             timerDisplay();
-        }
+        }}
     })
 );
 
@@ -166,6 +169,7 @@ function quizCreator() {
 
 //Checker Function to check if option is correct or not
 function checker(userOption) {
+    answerr = true;
     let userSolution = userOption.innerText;
     let question =
         document.getElementsByClassName("container-mid")[questionCount];
