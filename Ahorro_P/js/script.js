@@ -16,7 +16,6 @@ let countdown;
 let answerr = false;
 
 //Questions and Options array
-
 const quizArray = [
     {
         id: "0",
