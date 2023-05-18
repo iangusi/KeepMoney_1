@@ -1,7 +1,8 @@
 //References
 let timeLeft = document.querySelector(".time-left");
-let quizContainer = document.getElementById("container");
 let nextBtn = document.getElementById("next-button");
+let quizContainer = document.getElementById("container");
+let quizContainer2 = document.getElementById("container2");
 let countOfQuestion = document.querySelector(".number-of-question");
 let displayContainer = document.getElementById("display-container");
 let scoreContainer = document.querySelector(".score-container");
@@ -23,59 +24,69 @@ const quizArray = [
         question: "Which is the most widely spoken language in the world?",
         options: ["Spanish", "Mandarin", "English", "German"],
         correct: "Mandarin",
+		r: "Mandarin1",
     },
     {
         id: "1",
         question: "Which is the only continent in the world without a desert?",
         options: ["North America", "Asia", "Africa", "Europe"],
         correct: "Europe",
+		r: "Mandarin2",
     },
     {
         id: "2",
         question: "Who invented Computer?",
         options: ["Charles Babbage", "Henry Luce", "Henry Babbage", "Charles Luce"],
         correct: "Charles Babbage",
+		r: "Mandarin3",
     },
     {
         id: "3",
         question: "What do you call a computer on a network that requests files from another computer?",
         options: ["A client", "A host", "A router", "A web server"],
         correct: "A client",
+		r: "Mandarin4",
     },
     {
         id: "4",
         question: "Hardware devices that are not part of the main computer system and are often added later to the system.",
         options: ["Peripheral", "Clip art", "Highlight", "Execute"],
         correct: "Peripheral",
+		r: "Mandarin5",
     },
     {
         id: "5",
         question: "The main computer that stores the files that can be sent to computers that are networked together is:",
-        options: ["Clip art", "Mother board", "Peripheral", "File server"],
+        options: ["Clip", "Mother board", "Peripheral", "File server"],
         correct: "File server",
+		r: "Mandarin6",
     }, {
         id: "6",
         question: "How can you catch a computer virus?",
         options: ["Sending e-mail messages", "Using a laptop during the winter", "Opening e-mail attachments", "Shopping on-line"],
         correct: "Opening e-mail attachments",
+		r: "Mandarin7",
     },
     {
         id: "7",
         question: "Google (www.google.com) is a:",
         options: ["Search Engine", "Number in Math", "Directory of images", "Chat service on the web"],
         correct: "Search Engine",
+		r: "Mandarin8",
     },
     {
         id: "8",
         question: "Which is not an Internet protocol?",
         options: ["HTTP", "FTP", "STP", "IP"],
         correct: "STP",
+		r: "Mandarin9",
     },
     {
         id: "9",
         question: "Which of the following is not a valid domain name?",
         options: ["www.yahoo.com", "www.yahoo.co.uk", "www.com.yahoo", "www.yahoo.co.in"],
         correct: "www.com.yahoo",
+		r: "Mandarin0",
     },
 ];
 
@@ -90,8 +101,9 @@ restart.addEventListener("click", () => {
 nextBtn.addEventListener(
     "click",
     (displayNext = () => {
-        if(answerr == true){
+		if(answerr == true){
 			answerr = false;
+			quizContainer2.innerHTML = "";
         //increment questionCount
         questionCount += 1;
         //if last question
@@ -103,6 +115,7 @@ nextBtn.addEventListener(
             userScore.innerHTML =
                 "Tuviste " + scoreCount + " respuestas correctas de " + questionCount;
         } else {
+			
             //display questionCount
             countOfQuestion.innerHTML =
                 questionCount + 1 + " de " + quizArray.length + " preguntas";
@@ -111,7 +124,8 @@ nextBtn.addEventListener(
             count = 11;
             clearInterval(countdown);
             timerDisplay();
-        }}
+        }
+		}
     })
 );
 
@@ -122,6 +136,7 @@ const timerDisplay = () => {
         timeLeft.innerHTML = `${count}s`;
         if (count == 0) {
             clearInterval(countdown);
+			answerr = true;
             displayNext();
         }
     }, 1000);
@@ -163,17 +178,33 @@ function quizCreator() {
       <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
        <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
     `;
+	
         quizContainer.appendChild(div);
+		
     }
 }
 
 //Checker Function to check if option is correct or not
 function checker(userOption) {
-    answerr = true;
+	answerr = true;
     let userSolution = userOption.innerText;
     let question =
         document.getElementsByClassName("container-mid")[questionCount];
     let options = question.querySelectorAll(".option-div");
+	
+	for (let i of quizArray) {
+		if(userOption.innerHTML == i.options[0] ||
+		userOption.innerHTML == i.options[1] ||
+		userOption.innerHTML == i.options[2] ||
+		userOption.innerHTML == i.options[3]){
+			let question_DIVr = document.createElement("p");
+			question_DIVr.innerHTML = i.r;
+			question_DIVr.classList.add("r");
+		    question_DIVr.classList.remove("hide");
+		
+        quizContainer2.appendChild(question_DIVr);
+		}
+	}
 
     //if user clicked answer == correct option stored in object
     if (userSolution === quizArray[questionCount].correct) {
@@ -188,7 +219,8 @@ function checker(userOption) {
             }
         });
     }
-
+	
+	
     //clear interval(stop timer)
     clearInterval(countdown);
     //disable all options
