@@ -131,6 +131,8 @@ nextBtn.addEventListener(
 
 //Timer
 const timerDisplay = () => {
+    count--;
+    timeLeft.innerHTML = `${count}s`;
     countdown = setInterval(() => {
         count--;
         timeLeft.innerHTML = `${count}s`;
