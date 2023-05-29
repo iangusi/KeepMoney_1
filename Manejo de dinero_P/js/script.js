@@ -21,10 +21,10 @@ let answerr = false;
 const quizArray = [
     {
         id: "0",
-        question: "Which is the most widely spoken language in the world?",
-        options: ["Spanish", "Mandarin", "English", "German"],
-        correct: "Mandarin",
-		r: "Mandarin",
+        question: "¿Qué significa el término 'presupuesto'?",
+        options: ["Un presupuesto es un plan financiero que estima los ingresos y gastos de una persona o un hogar durante un período determinado.", "Un presupuesto es un programa economico que estima los ingresos y gastos de una persona o un hogar durante un período determinado.", "Un presupuesto es un plan financiero que estima los egresos de una persona o un hogar durante un período determinado.", "Un presupuesto es un estimado de los gastos que genera una persona o un hogar durante un período determinado."],
+        correct: "Un presupuesto es un plan financiero que estima los ingresos y gastos de una persona o un hogar durante un período determinado.",
+		r: "Un presupuesto es un plan financiero que estima los ingresos y gastos de una persona o un hogar durante un período determinado.",
     },
     {
         id: "1",
